@@ -1,25 +1,32 @@
 CXX = g++
 CXXFLAGS = -std=c++11
+SRC_DIR = src
+INC_DIR = inc
+LIB_DIR = $(SRC_DIR)/lib
 
 all: DesignLogger
 
-DesignLogger: LogProcessor.o InfoLogProcess.o DebugLogProcess.o ErrorLogProcess.o Main.o
+DesignLogger: $(LIB_DIR)/LogProcessor.o $(LIB_DIR)/InfoLogProcess.o $(LIB_DIR)/DebugLogProcess.o $(LIB_DIR)/ErrorLogProcess.o $(LIB_DIR)/Main.o
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
-LogProcessor.o: LogProcessor.cpp LogProcessor.h
-	$(CXX) $(CXXFLAGS) -c $<
+$(LIB_DIR)/LogProcessor.o: $(SRC_DIR)/LogProcessor.cpp $(INC_DIR)/LogProcessor.h | $(LIB_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@ -I$(INC_DIR)
 
-InfoLogProcess.o: InfoLogProcess.cpp InfoLogProcess.h LogProcessor.h
-	$(CXX) $(CXXFLAGS) -c $<
+$(LIB_DIR)/InfoLogProcess.o: $(SRC_DIR)/InfoLogProcess.cpp $(INC_DIR)/InfoLogProcess.h $(INC_DIR)/LogProcessor.h | $(LIB_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@ -I$(INC_DIR)
 
-DebugLogProcess.o: DebugLogProcess.cpp DebugLogProcess.h LogProcessor.h
-	$(CXX) $(CXXFLAGS) -c $<
+$(LIB_DIR)/DebugLogProcess.o: $(SRC_DIR)/DebugLogProcess.cpp $(INC_DIR)/DebugLogProcess.h $(INC_DIR)/LogProcessor.h | $(LIB_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@ -I$(INC_DIR)
 
-ErrorLogProcess.o: ErrorLogProcess.cpp ErrorLogProcess.h LogProcessor.h
-	$(CXX) $(CXXFLAGS) -c $<
+$(LIB_DIR)/ErrorLogProcess.o: $(SRC_DIR)/ErrorLogProcess.cpp $(INC_DIR)/ErrorLogProcess.h $(INC_DIR)/LogProcessor.h | $(LIB_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@ -I$(INC_DIR)
 
-Main.o: Main.cpp LogProcessor.h InfoLogProcess.h DebugLogProcess.h ErrorLogProcess.h
-	$(CXX) $(CXXFLAGS) -c $<
+$(LIB_DIR)/Main.o: Main.cpp $(INC_DIR)/LogProcessor.h $(INC_DIR)/InfoLogProcess.h $(INC_DIR)/DebugLogProcess.h $(INC_DIR)/ErrorLogProcess.h | $(LIB_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@ -I$(INC_DIR)
+
+$(LIB_DIR):
+	@if not exist "$(LIB_DIR)" mkdir "$(LIB_DIR)"
 
 clean:
-	rm -f *.o DesignLogger
+	rm -f $(LIB_DIR)/*.o DesignLogger
+	rmdir $(LIB_DIR)

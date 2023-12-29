@@ -1,31 +1,29 @@
 # Design Logger: A Simple Logging Framework in C++
 
-This C++ program demonstrates a simple logging framework that processes log messages based on their severity level. The program utilizes a `chain of responsibility pattern1`, where different log processors handle messages of specific severities.
+Design Logger is a C++ program that demonstrates a simple logging framework. It processes log messages based on their severity level, utilizing a `chain of responsibility` pattern where different log processors handle messages of specific severities.
+
+[Main.cpp](Main.cpp)
 
 ## Table of Contents
-- [Classes Overview](#classes-overview)
-- [How It Works](#how-it-works)
+- [Overview of Classes](#overview-of-classes)
+- [Program Flow](#program-flow)
 - [UML Diagram](#uml-diagram)
 - [Installation and Usage](#installation-and-usage)
 - [Contributing](#contributing)
-- [Tests](#tests)
 - [License](#license)
 
-## Classes Overview
+## Overview of Classes
 
 ### `LogLevel` Enum
-
-An enumeration class representing different log levels: INFO, DEBUG, and ERROR.
+This enumeration class represents different log levels: INFO, DEBUG, and ERROR.
 
 ### `LogProcessor` Class
+An abstract class that represents the base log processor. It contains a pointer to the next log processor in the chain and a virtual function `log` that is overridden by derived classes.
 
-An abstract class representing the base log processor. It contains a pointer to the next log processor in the chain and a virtual function `log` that is overridden by derived classes.
+### `InfoLogProcess`, `DebugLogProcess`, `ErrorLogProcess` 
+These are derived classes from `LogProcessor` that handle INFO, DEBUG, and ERROR log levels, respectively. Each class overrides the `log` function to process messages of the specified severity level.
 
-### `InfoLogProcess`, `DebugLogProcess`, `ErrorLogProcess` Classes
-
-Derived classes from `LogProcessor` that handle INFO, DEBUG, and ERROR log levels, respectively. Each class overrides the `log` function to process messages of the specified severity level.
-
-## How It Works
+## Program Flow
 
 1. The program creates a chain of log processors where each processor is responsible for handling a specific log level.
 2. When a log message is generated, it is passed through the chain of log processors.
@@ -35,35 +33,45 @@ Derived classes from `LogProcessor` that handle INFO, DEBUG, and ERROR log level
 
 ![UML Diagram](Logger_UML.jpg)
 
-**Note:** The UML diagram illustrating the class relationships is attached. Please refer to the provided diagram for a visual representation of the class structure.
+Refer to the UML diagram above for a visual representation of the class structure.
 
 ## Installation and Usage
 
-Detailed instructions on how to install, setup, and use the project. Include code examples here.
+Clone the repository:
+
+```git
+git clone https://github.com/Shoolapani/awesome-low-level-design-CPP.git
+```
 
 ### Windows
 
+Navigate to the project directory and compile the code:
+
 ```bash
+
+cd '.\Design Logger\'
+
 mingw32-make
 ./DesignLogger
 ```
 
 ### Linux
 
+Navigate to the project directory and compile the code:
+
 ```bash
+
+cd 'Design Logger'
+
 make
 ./DesignLogger
 ```
 
-Ensure that you have the necessary build tools installed on your system, and the Makefile is present in the same directory as the source code.
+Ensure that you have the necessary build tools installed on your system, and the Makefile is in the same directory as the source code.
 
 ## Contributing
 
-If you're interested in contributing to this project, first, thank you! Second, please read our contributing guidelines before getting started.
-
-<!-- ## Tests
-
-Explain how to run the automated tests for this system. -->
+Interested in contributing to this project? Thank you! Please read our contributing guidelines before getting started.
 
 ## License
 
