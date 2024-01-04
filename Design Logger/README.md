@@ -5,12 +5,19 @@ Design Logger is a C++ program that demonstrates a simple logging framework. It 
 [Main.cpp](Main.cpp)
 
 ## Table of Contents
+- [Core Use Cases](#core-use-cases)
 - [Overview of Classes](#overview-of-classes)
 - [Program Flow](#program-flow)
 - [UML Diagram](#uml-diagram)
 - [Installation and Usage](#installation-and-usage)
 - [Contributing](#contributing)
 - [License](#license)
+
+## Core Use Cases
+
+1. **Logging Messages:** Ability to log messages at different levels.
+2. **Configuring Loggers:** Setup loggers with varying settings and outputs.
+3. **Managing Log Output:** Direct messages to appropriate destinations based on configurations(`ToDo 😅`).
 
 ## Overview of Classes
 
